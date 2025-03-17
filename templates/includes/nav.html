@@ -1,0 +1,29 @@
+{% if section == 'database' %}
+  <li class="selected">
+    <a href="{% url 'dashboard' %}">My dashboard</a>
+  </li>
+{% else %}
+  <li>
+    <a href="{% url 'dashboard' %}">My dashboard</a>
+  </li>
+{% endif %}
+
+{% if section == 'images' %}
+  <li class="selected">
+    <a href="#">Images</a>
+  </li>
+{% else %}
+  <li>
+    <a href="#">Images</a>
+  </li>
+{% endif %}
+
+{% if section == 'people' %}
+  <li class="selected">
+    <a href="#">People</a>
+  </li>
+{% else %}
+  <li>
+    <a href="#">People</a>
+  </li>
+{% endif %}

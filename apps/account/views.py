@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.handlers.wsgi import WSGIRequest
@@ -35,11 +36,11 @@ def user_login(request: WSGIRequest):
 
 
 @login_required
-def dashboard(request):
+def dashboard(request: WSGIRequest):
     return render(request, "account/dashboard.html", {"section": "dashboard"})
 
 
-def register(request):
+def register(request: WSGIRequest):
     if request.method == "POST":
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
@@ -60,7 +61,7 @@ def register(request):
 
 
 @login_required
-def edit(request):
+def edit(request: WSGIRequest):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(
@@ -69,6 +70,9 @@ def edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            messages.success(request, "Profile updated successfully")
+        else:
+            messages.error(request, "Error updating your profile")
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)

@@ -12,4 +12,11 @@
       <input type="submit" value="Create my account" />
     </p>
   </form>
+  <div class="social">
+    <ul>
+      <li class="google">
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Sign in with Google</a>
+      </li>
+    </ul>
+  </div>
 {% endblock %}
